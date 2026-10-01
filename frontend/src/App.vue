@@ -5,7 +5,7 @@
       <div class="header-inner">
         <div>
           <RouterLink to="/" style="font-family: 'Patrick Hand', cursive; color: var(--c2); font-size: 34px; font-weight: bold; letter-spacing: 0;">
-            SupportDesk
+            Support Desk
           </RouterLink>
         </div>
         <div style="display: flex; align-items: center; gap: 12px;">

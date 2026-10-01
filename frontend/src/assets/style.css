@@ -89,9 +89,9 @@ h1, h2, h3, p, div, ul, li {
 
 .title {
   font-family: inherit;
-  font-size: 38px;
+  font-size: 28px;
   line-height: calc(var(--lh) * 2);
-  font-weight: bold;
+  font-weight: normal;
   letter-spacing: 0;
 }
 

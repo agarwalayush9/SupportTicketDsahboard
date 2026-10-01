@@ -1,7 +1,7 @@
 <template>
   <div>
     <!-- Title -->
-    <h1 class="title">Support Tickets</h1>
+    <h1 class="title">Tickets</h1>
 
     <!-- Summary -->
     <div class="mb-1 text-faint">
