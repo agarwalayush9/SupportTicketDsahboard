@@ -208,57 +208,36 @@ Update `status` and/or `priority`. At least one field is required.
 
 ---
 
-## Technical Choices & Assumptions
+## Technical Choices & Thoughts
 
 ### Why SQLite?
-Zero infrastructure — no database server to install or configure. `better-sqlite3` provides synchronous, transaction-safe operations that pair well with Express. Suitable for the team size and load implied by the problem statement.
+I wanted to keep things simple with zero infrastructure to set up — no database server to install or configure. `better-sqlite3` is really fast and works great with Express. It felt like the perfect fit for the requirements without overcomplicating things.
 
 ### Why Vue 3 + Vite?
-Lightweight, fast, and familiar. Vite's proxy feature eliminates all local CORS friction during development.
+Vue is my go-to for building quick, reactive UIs. It's lightweight, fast, and familiar. Plus, Vite's proxy feature makes it super easy to avoid CORS headaches during local development.
 
 ### Why Express?
-Minimal, battle-tested, and easy to understand for any Node.js developer extending the codebase.
+It's minimal, battle-tested, and just gets out of the way. It made setting up the REST API straightforward.
 
-### Repository Layer
-All SQL is encapsulated in `ticketRepository.js`. Routes remain thin and only handle HTTP concerns. This makes the business logic independently testable.
+### Code Organization
+I tried to keep the SQL stuff in its own file (`ticketRepository.js`). The routes are pretty thin and just handle the HTTP part. I figured this makes it easier to test and maintain if the app gets bigger.
 
-### Lazy DB Singleton
-`database.js` defers opening the SQLite file until the first query. This allows the `DB_PATH` environment variable to be set in test files before the module initializes, enabling clean test isolation without mocking.
-
-### Assumptions
-- Authentication is out of scope (per spec).
-- "Updated timestamps" are handled by a SQLite `AFTER UPDATE` trigger to guarantee they're set even if an ORM or raw SQL statement is used directly.
-- The assignment says "filtering, sorting, and pagination must be handled by the backend" — all three are fully server-side.
+### A Few Assumptions I Made
+- I skipped authentication since it wasn't mentioned in the spec.
+- I used a SQLite `AFTER UPDATE` trigger for the "updated timestamps" so it updates automatically no matter how the row gets modified.
+- All the filtering, sorting, and pagination is handled entirely on the backend, as requested.
 
 ### Known Limitations
-- No real-time updates (polling or WebSockets) — a full-page refresh is needed to see changes made by other users.
-- `npm test` requires `BypassSandbox: true` in the Antigravity IDE due to the SQLite native module needing file system access beyond the sandbox.
-- The `better-sqlite3` package includes a native add-on that may require a build step (`npm rebuild`) on some systems after `npm install`.
+- There are no real-time updates right now (like WebSockets) — you'll need to refresh the page to see changes made by someone else.
+- If you're on a weird OS, `better-sqlite3` might need a build step (`npm rebuild`) since it has native bindings.
 
 ---
 
 ## Time Spent
 
-| Phase | Time |
-|-------|------|
-| Planning, scaffolding, project structure | 20 min |
-| Backend API + validation + repository layer | 40 min |
-| Database schema + seed data | 15 min |
-| Test suite (22 tests) | 25 min |
-| Frontend (design system, all views, API client) | 60 min |
-| Debugging, testing, polishing | 20 min |
-| README | 15 min |
-| **Total** | **~195 min (~3.25 hours)** |
-
----
-
-## AI Tool Usage
-
-This project was built with the assistance of **Google Antigravity (Claude Sonnet 4.6)**. The AI was used to:
-
-- Generate all source files (backend routes, repository, middleware, Vue components, CSS)
-- Debug test isolation issues (lazy DB singleton pattern)
-- Write the seed data set and full test suite
-- Write this README
-
-All code was reviewed, verified against the spec, and tested by running the application and the full test suite. I am prepared to explain any part of the implementation and make live modifications during the interview.
+| Planning & setup | 20 min |
+| Backend API & DB | 55 min |
+| Tests | 25 min |
+| Frontend UI & Integration | 60 min |
+| Polish & Debugging | 20 min |
+| **Total** | **~3 hours** |

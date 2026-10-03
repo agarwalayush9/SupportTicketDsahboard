@@ -4,7 +4,17 @@
       <RouterLink to="/" class="text-faint">&laquo; Back to Tickets</RouterLink>
     </div>
 
-    <div v-if="loading" class="text-faint">Loading...</div>
+    <div v-if="loading">
+      <div class="skeleton skeleton-text" style="width: 50%; height: 32px; margin-bottom: var(--lh);"></div>
+      <div class="mb-1"><div class="skeleton skeleton-text" style="width: 35%;"></div></div>
+      <div class="mb-2"><div class="skeleton skeleton-text" style="width: 250px; height: 32px;"></div></div>
+      <div class="text-faint">Description:</div>
+      <div class="mb-2">
+        <div class="skeleton skeleton-text" style="width: 95%; margin-bottom: 8px;"></div>
+        <div class="skeleton skeleton-text" style="width: 85%; margin-bottom: 8px;"></div>
+        <div class="skeleton skeleton-text" style="width: 90%;"></div>
+      </div>
+    </div>
     <div v-else-if="error" class="text-red">Error: {{ error }}</div>
     <div v-else-if="ticket">
       

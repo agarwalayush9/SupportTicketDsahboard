@@ -27,6 +27,13 @@ body {
   color: var(--c2);
   background: linear-gradient(rgba(40, 30, 20, 0.55), rgba(40, 30, 20, 0.55)), #5a3e28 url('./wooden-desk.jpg') center / cover fixed no-repeat;
   min-height: 100vh;
+  /* Marker nib cursor */
+  cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24'%3E%3Ccircle cx='12' cy='12' r='10' fill='%233b6df0' opacity='0.12'/%3E%3Ccircle cx='12' cy='12' r='4' fill='%233b6df0' opacity='0.7'/%3E%3Ccircle cx='12' cy='12' r='1.5' fill='%23fff'/%3E%3C/svg%3E") 12 12, auto;
+}
+
+/* Pointer for clickable elements — brighter nib */
+a, button, select, .ticket-row, .inline-btn {
+  cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24'%3E%3Ccircle cx='12' cy='12' r='11' fill='%233b6df0' opacity='0.18'/%3E%3Ccircle cx='12' cy='12' r='5' fill='%233b6df0' opacity='0.85'/%3E%3Ccircle cx='12' cy='12' r='2' fill='%23fff'/%3E%3C/svg%3E") 12 12, pointer !important;
 }
 
 ::selection { background: rgba(59, 109, 240, 0.18); color: var(--c2); }
@@ -39,6 +46,8 @@ body {
   background: var(--c1);
   position: relative;
   border-radius: 2px;
+  display: flex;
+  flex-direction: column;
   box-shadow:
     0 2px 4px rgba(0,0,0,0.08),
     0 8px 24px rgba(0,0,0,0.10),
@@ -72,6 +81,7 @@ body {
   position: relative;
   z-index: 2;
   padding: var(--lh) 40px var(--lh) 96px;
+  flex: 1;
 }
 
 /* Reset */
@@ -199,3 +209,24 @@ textarea.inline-input:focus {
 ::-webkit-scrollbar-track { background: transparent; }
 ::-webkit-scrollbar-thumb { background: rgba(45, 45, 47, 0.12); border-radius: 3px; }
 ::-webkit-scrollbar-thumb:hover { background: rgba(45, 45, 47, 0.25); }
+
+/* Skeleton Loader */
+@keyframes shimmer {
+  0% { background-position: -800px 0; }
+  100% { background-position: 800px 0; }
+}
+
+.skeleton {
+  background: rgba(45, 45, 47, 0.04);
+  background-image: linear-gradient(to right, rgba(45, 45, 47, 0.04) 0%, rgba(45, 45, 47, 0.08) 20%, rgba(45, 45, 47, 0.04) 40%, rgba(45, 45, 47, 0.04) 100%);
+  background-repeat: no-repeat;
+  background-size: 800px 100%;
+  animation: shimmer 1.5s infinite linear forwards;
+  border-radius: 2px;
+}
+
+.skeleton-text {
+  height: 20px;
+  display: inline-block;
+  vertical-align: middle;
+}

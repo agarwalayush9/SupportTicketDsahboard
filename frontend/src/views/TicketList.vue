@@ -57,8 +57,17 @@
     </div>
 
     <!-- Loading State -->
-    <div v-if="loading" class="mb-1 text-faint">
-      Loading...
+    <div v-if="loading" class="mb-2">
+      <div v-for="i in 5" :key="i" class="ticket-row" style="pointer-events: none; border-bottom: 1px solid rgba(45, 45, 47, 0.08);">
+        <div>
+          <div class="skeleton skeleton-text" style="width: 250px;"></div>
+          <div class="text-faint" style="margin-top: 4px;"><div class="skeleton skeleton-text" style="width: 150px; height: 16px;"></div></div>
+        </div>
+        <div style="text-align: right;">
+          <div class="skeleton skeleton-text" style="width: 60px;"></div>
+          <div class="text-faint" style="margin-top: 4px;"><div class="skeleton skeleton-text" style="width: 80px; height: 16px;"></div></div>
+        </div>
+      </div>
     </div>
 
     <!-- Empty State -->
