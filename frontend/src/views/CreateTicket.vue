@@ -135,7 +135,7 @@ async function submitForm() {
 <style scoped>
 .ml-1 { margin-left: 16px; }
 .input-error {
-  border-left-color: var(--c3) !important;
-  border-bottom-color: var(--c3) !important;
+  border-left-color: var(--c4) !important;
+  border-bottom-color: var(--c4) !important;
 }
 </style>

@@ -1,23 +1,13 @@
 <template>
   <div class="app-wrapper">
-    <!-- Website Touch: Sticky Glassmorphism Header -->
-    <header class="app-header">
-      <div class="header-inner">
-        <div>
-          <RouterLink to="/" style="font-family: 'Patrick Hand', cursive; color: var(--c2); font-size: 34px; font-weight: bold; letter-spacing: 0;">
-            Support Desk
-          </RouterLink>
-        </div>
-        <div style="display: flex; align-items: center; gap: 12px;">
-          <RouterLink to="/" class="text-accent" style="font-weight: bold;">All Tickets</RouterLink>
-          <span class="text-faint">&bull;</span>
-          <!-- Web touch: FAB/Box button -->
-          <RouterLink to="/tickets/new" class="inline-btn btn-box" style="height: var(--lh); line-height: var(--lh); display: inline-block;">
-            + New Ticket
-          </RouterLink>
-        </div>
+    <!-- Clean nav bar pinned to top of the paper -->
+    <nav class="nav-bar">
+      <RouterLink to="/" class="nav-logo">SupportDesk</RouterLink>
+      <div class="nav-links">
+        <RouterLink to="/" class="text-accent">All Tickets</RouterLink>
+        <RouterLink to="/tickets/new" class="inline-btn btn-box">+ New Ticket</RouterLink>
       </div>
-    </header>
+    </nav>
 
     <div class="container">
       <RouterView v-slot="{ Component }">
@@ -26,6 +16,10 @@
         </Transition>
       </RouterView>
     </div>
+
+    <footer class="app-footer">
+      Built by&nbsp;<a href="https://ayush-builds.vercel.app/" target="_blank" rel="noopener">Ayush Agarwal</a>
+    </footer>
   </div>
 </template>
 
@@ -34,26 +28,41 @@ import { RouterLink, RouterView } from 'vue-router'
 </script>
 
 <style scoped>
-.app-header {
+.nav-bar {
   position: sticky;
   top: 0;
   z-index: 50;
-  height: calc(var(--lh) * 2);
-  /* The blur gives a beautiful modern website touch when the notebook lines scroll under it */
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  background: rgba(253, 253, 252, 0.75); 
-  border-bottom: 2px dashed rgba(138, 180, 248, 0.2);
-}
-
-.header-inner {
-  padding-left: 96px; /* align with the margin line in container */
-  padding-right: 32px;
-  max-width: 960px;
-  margin: 0 auto;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  height: 100%;
+  padding: 0 40px 0 96px;
+  height: calc(var(--lh) * 2);
+  background: var(--c1);
+  border-bottom: 1px solid rgba(45, 45, 47, 0.1);
+}
+
+.nav-logo {
+  font-size: 24px;
+  color: var(--c2) !important;
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.app-footer {
+  padding: 0 40px 0 96px;
+  height: calc(var(--lh) * 2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--c1);
+  border-top: 1px solid rgba(45, 45, 47, 0.1);
+  font-size: 16px;
+}
+.app-footer a {
+  color: var(--c3);
 }
 </style>

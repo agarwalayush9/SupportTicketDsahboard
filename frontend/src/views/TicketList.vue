@@ -192,28 +192,28 @@ onMounted(() => { fetchTickets(); fetchSummary() })
   display: flex;
   height: var(--lh);
   align-items: center;
-  padding-left: 8px;
   margin-left: -8px;
-  border-bottom: 2px dashed rgba(15, 23, 42, 0.2);
+  padding-left: 8px;
+  border-bottom: 1px solid rgba(45, 45, 47, 0.12);
 }
 .ticket-row {
   display: flex;
   height: var(--lh);
   cursor: pointer;
   align-items: center;
-  border-radius: 4px;
-  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
-  margin-left: -8px; /* pull slightly out so text stays aligned when padded */
+  margin-left: -8px;
   padding-left: 8px;
+  border-radius: 3px;
+  transition: color 0.15s ease;
 }
 .ticket-row:hover {
-  background-color: rgba(59, 130, 246, 0.04);
-  transform: translateX(4px);
+  color: var(--c3);
 }
-.row-num { width: 32px; color: var(--c2); opacity: 0.5; }
-.row-title { flex: 1; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; color: var(--c2); padding-right: 16px; transition: color 0.2s; }
+.row-num { width: 28px; opacity: 0.4; }
+.row-title { flex: 1; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; padding-right: 12px; transition: color 0.15s; }
 .ticket-row:hover .row-title { color: var(--c3); }
 .row-status { width: 110px; }
 .row-priority { width: 90px; }
-.row-date { width: 80px; color: var(--c2); opacity: 0.5; text-align: right; padding-right: 8px; }
+.row-date { width: 72px; opacity: 0.4; text-align: right; padding-right: 4px; }
 </style>
+
