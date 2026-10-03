@@ -12,14 +12,31 @@ let _db = null;
 function getDb() {
   if (_db) return _db;
 
-  const DB_DIR = process.env.DB_PATH
-    ? path.dirname(process.env.DB_PATH)
-    : path.join(__dirname, '../../data');
-  const DB_PATH = process.env.DB_PATH || path.join(DB_DIR, 'tickets.db');
+  const isVercel = process.env.VERCEL === '1' || process.env.VERCEL === 'true';
+  let DB_DIR, DB_PATH;
+
+  if (process.env.DB_PATH) {
+    DB_DIR = path.dirname(process.env.DB_PATH);
+    DB_PATH = process.env.DB_PATH;
+  } else if (isVercel) {
+    DB_DIR = '/tmp';
+    DB_PATH = '/tmp/tickets.db';
+  } else {
+    DB_DIR = path.join(__dirname, '../../data');
+    DB_PATH = path.join(DB_DIR, 'tickets.db');
+  }
 
   // Ensure data directory exists
   if (!fs.existsSync(DB_DIR)) {
     fs.mkdirSync(DB_DIR, { recursive: true });
+  }
+
+  // On Vercel, the local filesystem is read-only. We must copy the seeded DB to /tmp to write to it.
+  if (isVercel && !fs.existsSync(DB_PATH)) {
+    const bundledDbPath = path.join(__dirname, '../../data/tickets.db');
+    if (fs.existsSync(bundledDbPath)) {
+      fs.copyFileSync(bundledDbPath, DB_PATH);
+    }
   }
 
   _db = new Database(DB_PATH);
